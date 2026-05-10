@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire's Row - Trading Course</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: Arial, sans-serif;
+background-color: #0a0a0a;
+color: white;
+overflow-x: hidden;
+}
+/* HEADER */
+header {
+background-color: #111;
+padding: 20px;
+text-align: center;
+border-bottom: 2px solid gold;
+animation: slideDown 1s ease;
+}
+header h1 {
+color: gold;
+font-size: 36px;
+letter-spacing: 3px;
+text-shadow: 0 0 20px gold;
+}
+header p { color: #ccc; margin-top: 5px; }
+/* HERO */
+.hero {
+text-align: center;
+padding: 80px 20px;
+background: linear-gradient(to bottom, #111, #0a0a0a);
+animation: fadeIn 1.5s ease;
+}
+.hero h2 {
+font-size: 36px;
+color: gold;
+margin-bottom: 15px;
+animation: slideUp 1s ease;
+text-shadow: 0 0 15px gold;
+}
+.hero p {
+font-size: 16px;
+color: #ccc;
+max-width: 600px;
+margin: 0 auto 30px;
+animation: slideUp 1.2s ease;
+}
+.hero button {
+background-color: gold;
+color: black;
+padding: 15px 40px;
+font-size: 18px;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 0 20px gold;
+animation: pulse 2s infinite;
+}
+.hero button:hover {
+background-color: white;
+color: black;
+transform: scale(1.1);
+box-shadow: 0 0 40px gold;
+}
+/* FEATURES */
+.features {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 20px;
+padding: 50px 20px;
+background-color: #111;
+}
+.feature-card {
+background-color: #1a1a1a;
+border: 1px solid gold;
+border-radius: 10px;
+padding: 25px;
+width: 250px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+animation: fadeInUp 1s ease;
+}
+.feature-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 0 30px gold;
+border: 1px solid white;
+}
+.feature-card h3 { color: gold; margin-bottom: 10px; font-size: 18px; }
+.feature-card p { color: #ccc; font-size: 14px; }
+/* POPUP OVERLAY */
+.overlay {
+display: none;
+position: fixed;
+top: 0; left: 0;
+width: 100%; height: 100%;
+background: rgba(0,0,0,0.85);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+animation: fadeIn 0.3s ease;
+}
+.overlay.active { display: flex; }
+.popup {
+background: #1a1a1a;
+border: 2px solid gold;
+border-radius: 15px;
+padding: 35px;
+max-width: 480px;
+width: 90%;
+text-align: center;
+position: relative;
+animation: popIn 0.4s ease;
+box-shadow: 0 0 40px gold;
+}
+.popup img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+border-radius: 10px;
+margin-bottom: 15px;
+border: 1px solid gold;
+}
+.popup h2 { color: gold; margin-bottom: 10px; font-size: 22px; }
+.popup p { color: #ccc; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+.popup ul {
+list-style: none;
+text-align: left;
+margin-bottom: 20px;
+color: #ccc;
+}
+.popup ul li { margin-bottom: 8px; font-size: 14px; }
+.popup ul li::before { content: "✔ "; color: gold; }
+.close-btn {
+position: absolute;
+top: 12px; right: 18px;
+font-size: 24px;
+color: gold;
+cursor: pointer;
+transition: all 0.3s;
+}
+.close-btn:hover { color: white; transform: rotate(90deg); }
+.popup button {
+background-color: gold;
+color: black;
+padding: 12px 30px;
+font-size: 15px;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.3s;
+}
+.popup button:hover {
+background-color: white;
+transform: scale(1.05);
+}
+/* PRICING */
+.pricing {
+text-align: center;
+padding: 60px 20px;
+animation: fadeIn 1.5s ease;
+}
+.pricing h2 {
+color: gold;
+font-size: 32px;
+margin-bottom: 30px;
+text-shadow: 0 0 10px gold;
+}
+.price-box {
+display: inline-block;
+background-color: #1a1a1a;
+border: 2px solid gold;
+border-radius: 10px;
+padding: 35px 55px;
+box-shadow: 0 0 30px gold;
+transition: all 0.3s;
+}
+.price-box:hover { transform: scale(1.03); box-shadow: 0 0 50px gold; }
+.price-box h3 { font-size: 22px; color: white; margin-bottom: 10px; }
+.price-box .price {
+font-size: 40px;
+color: gold;
+font-weight: bold;
+margin-bottom: 20px;
+text-shadow: 0 0 10px gold;
+}
+.price-box ul { list-style: none; margin-bottom: 25px; text-align: left; color: #ccc; }
+.price-box ul li { margin-bottom: 10px; }
+.price-box ul li::before { content: "✔ "; color: gold; }
+.price-box button {
+background-color: gold;
+color: black;
+padding: 14px 40px;
+font-size: 17px;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.3s;
+box-shadow: 0 0 15px gold;
+}
+.price-box button:hover {
+background-color: white;
+transform: scale(1.08);
+box-shadow: 0 0 30px gold;
+}
+/* FOOTER */
+footer {
+text-align: center;
+padding: 25px;
+background-color: #111;
+color: #666;
+border-top: 1px solid gold;
+}
+/* ANIMATIONS */
+@keyframes slideDown {
+from { transform: translateY(-60px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideUp {
+from { transform: translateY(40px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+@keyframes fadeInUp {
+from { transform: translateY(30px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+@keyframes popIn {
+from { transform: scale(0.7); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse {
+0% { box-shadow: 0 0 10px gold; }
+50% { box-shadow: 0 0 35px gold; }
+100% { box-shadow: 0 0 10px gold; }
+}
+</style>
+</head>
+<body>
+<header>
+<h1>💰 Billionaire's Row</h1>
+<p>Your Gateway to Financial Freedom Through Trading</p>
+</header>
+<div class="hero">
+<h2>Learn to Trade Like a Pro</h2>
+<p>Join our exclusive trading course and master the skills needed to grow your wealth in the
+financial markets. Start your journey to financial freedom today.</p>
+<button onclick="document.querySelector('.pricing').scrollIntoView({behavior:'smooth'})">🚀
+Enroll Now</button>
+</div>
+<div class="features">
+<div class="feature-card" onclick="openPopup('live')">
+<h3>📈 Live Trading</h3>
+<p>Click to learn more about our live trading sessions.</p>
+</div>
+<div class="feature-card" onclick="openPopup('curriculum')">
+<h3>📚 Full Curriculum</h3>
+<p>Click to see everything included in the course.</p>
+</div>
+<div class="feature-card" onclick="openPopup('community')">
+<h3>🤝 Community</h3>
+<p>Click to find out about our trader community.</p>
+</div>
+<div class="feature-card" onclick="openPopup('results')">
+<h3>🏆 Proven Results</h3>
+<p>Click to see what our students have achieved.</p>
+</div>
+</div>
+<!-- LIVE TRADING POPUP -->
+<div class="overlay" id="popup-live">
+<div class="popup">
+<span class="close-btn" onclick="closePopup('live')">✕</span>
+<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600"
+alt="Live Trading"/>
+<h2>📈 Live Trading Sessions</h2>
+<p>Watch and learn as our expert traders execute real trades in real time. You'll see exactly
+how to read the markets, manage risk, and make profitable decisions.</p>
+<ul>
+<li>Daily live trading sessions</li>
+<li>Real market analysis</li>
+<li>Q&A after every session</li>
+<li>Trade recaps and breakdowns</li>
+<li>Access to session recordings</li>
+</ul>
+<button onclick="closePopup('live')">Got It! 🔥</button>
+</div>
+</div>
+<!-- CURRICULUM POPUP -->
+<div class="overlay" id="popup-curriculum">
+<div class="popup">
+<span class="close-btn" onclick="closePopup('curriculum')">✕</span>
+<img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=600"
+alt="Curriculum"/>
+<h2>📚 Full Curriculum</h2>
+<p>Our curriculum takes you from complete beginner to confident trader. Every module is
+carefully designed to build your knowledge step by step.</p>
+<ul>
+<li>Module 1 — Trading Basics & Mindset</li>
+<li>Module 2 — Reading Charts & Candlesticks</li>
+<li>Module 3 — Technical Analysis</li>
+<li>Module 4 — Risk Management</li>
+<li>Module 5 — Advanced Strategies</li>
+<li>Module 6 — Building a Trading Plan</li>
+</ul>
+<button onclick="closePopup('curriculum')">Got It! 🔥</button>
+</div>
+</div>
+<!-- COMMUNITY POPUP -->
+<div class="overlay" id="popup-community">
+<div class="popup">
+<span class="close-btn" onclick="closePopup('community')">✕</span>
+<img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600"
+alt="Community"/>
+<h2>🤝 Our Community</h2>
+<p>When you join Billionaire's Row you're not just getting a course — you're joining a family
+of traders who support each other every single day.</p>
+<ul>
+<li>Private WhatsApp/Telegram group</li>
+<li>Daily market signals</li>
+<li>Peer to peer accountability</li>
+<li>Monthly group calls</li>
+<li>Exclusive member events</li>
+</ul>
+<button onclick="closePopup('community')">Got It! 🔥</button>
+</div>
+</div>
+<!-- RESULTS POPUP -->
+<div class="overlay" id="popup-results">
+<div class="popup">
+<span class="close-btn" onclick="closePopup('results')">✕</span>
+<img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600"
+alt="Results"/>
+<h2>🏆 Proven Results</h2>
+<p>Our students come from all walks of life and have gone on to achieve incredible results
+in the markets after completing Billionaire's Row.</p>
+<ul>
+<li>200+ students enrolled</li>
+<li>Average 30% portfolio growth</li>
+<li>Students trading Forex, Crypto & Stocks</li>
+<li>Multiple students now trading full time</li>
+<li>5 star rated by our community</li>
+</ul>
+<button onclick="closePopup('results')">Got It! 🔥</button>
+</div>
+</div>
+<div class="pricing">
+<h2>💎 Course Pricing</h2>
+<div class="price-box">
+<h3>Full Access</h3>
+<div class="price">TSH 100,000</div>
+<ul>
+<li>Complete Trading Course</li>
+<li>Live Trading Sessions</li>
+<li>Private Community Access</li>
+<li>Lifetime Updates</li>
+<li>Certificate of Completion</li>
+</ul>
+<button onclick="alert('Contact us on WhatsApp to enroll! 🚀')">🚀 Enroll Now</button>
+</div>
+</div>
+<footer>
+<p>💰 &copy; 2026 Billionaire's Row. All rights reserved.</p>
+</footer>
+<script>
+function openPopup(id) {
+document.getElementById('popup-' + id).classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+function closePopup(id) {
+document.getElementById('popup-' + id).classList.remove('active');
+document.body.style.overflow = 'auto';
+}
+// Close popup when clicking outside
+document.querySelectorAll('.overlay').forEach(overlay => {
+overlay.addEventListener('click', function(e) {
+if (e.target === this) {
+this.classList.remove('active');
+document.body.style.overflow = 'auto';
+}
+});
+});
+</script>
+</body>
+</html>
