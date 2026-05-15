@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Login - Billionaire's Row</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0a0a0a;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* HEADER */
+header {
+  background-color: #111;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid gold;
+  animation: slideDown 1s ease;
+}
+header h1 {
+  color: gold;
+  font-size: 36px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px gold;
+}
+header h1 a {
+  color: gold;
+  text-decoration: none;
+}
+header p { color: #ccc; margin-top: 5px; }
+/* LOGIN SECTION */
+.login-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom, #111, #0a0a0a);
+  animation: fadeIn 1.5s ease;
+}
+.login-card {
+  background-color: #1a1a1a;
+  border: 2px solid gold;
+  border-radius: 15px;
+  padding: 40px 35px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+  animation: popIn 0.6s ease;
+}
+.login-card h2 {
+  color: gold;
+  font-size: 26px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 15px gold;
+}
+.login-card .subtitle {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 15px;
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input::placeholder {
+  color: #555;
+}
+.form-group input:focus {
+  border-color: gold;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 13px;
+}
+.form-options label {
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.form-options label input[type="checkbox"] {
+  accent-color: gold;
+  cursor: pointer;
+}
+.form-options a {
+  color: gold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.form-options a:hover {
+  color: white;
+}
+.login-btn {
+  width: 100%;
+  background-color: gold;
+  color: black;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+.login-btn:hover {
+  background-color: white;
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+.login-btn:active {
+  transform: scale(0.98);
+}
+.signup-link {
+  margin-top: 20px;
+  color: #999;
+  font-size: 14px;
+}
+.signup-link a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.signup-link a:hover {
+  color: white;
+}
+.error-message {
+  display: none;
+  background-color: rgba(255, 50, 50, 0.15);
+  border: 1px solid #ff3232;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+.error-message.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+.success-message {
+  display: none;
+  background-color: rgba(50, 205, 50, 0.15);
+  border: 1px solid #32cd32;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #90ee90;
+  font-size: 14px;
+}
+.success-message.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  background-color: #111;
+  color: #666;
+  border-top: 1px solid gold;
+}
+/* ANIMATIONS */
+@keyframes slideDown {
+  from { transform: translateY(-60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="index.html">Billionaire's Row</a></h1>
+  <p>Student Portal</p>
+</header>
+
+<div class="login-section">
+  <div class="login-card">
+    <h2>Student Login</h2>
+    <p class="subtitle">Access your trading course dashboard</p>
+
+    <div class="error-message" id="error-msg"></div>
+    <div class="success-message" id="success-msg"></div>
+
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required
+               autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password"
+               required minlength="6" autocomplete="current-password">
+      </div>
+
+      <div class="form-options">
+        <label>
+          <input type="checkbox" id="remember" name="remember"> Remember me
+        </label>
+        <a href="#" onclick="handleForgotPassword(event)">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">Sign In</button>
+    </form>
+
+    <p class="signup-link">
+      Don't have an account? <a href="index.html#enroll">Enroll Now</a>
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Billionaire's Row. All rights reserved.</p>
+</footer>
+
+<script>
+function handleLogin(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const errorMsg = document.getElementById('error-msg');
+  const successMsg = document.getElementById('success-msg');
+
+  // Reset messages
+  errorMsg.classList.remove('visible');
+  successMsg.classList.remove('visible');
+
+  // Basic validation
+  if (!email || !password) {
+    errorMsg.textContent = 'Please fill in all fields.';
+    errorMsg.classList.add('visible');
+    return;
+  }
+
+  if (password.length < 6) {
+    errorMsg.textContent = 'Password must be at least 6 characters.';
+    errorMsg.classList.add('visible');
+    return;
+  }
+
+  // Simulate login (replace with actual API call)
+  const btn = document.querySelector('.login-btn');
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+
+  setTimeout(function() {
+    btn.textContent = 'Sign In';
+    btn.disabled = false;
+
+    // Demo: show success message
+    successMsg.textContent = 'Login successful! Redirecting to your dashboard...';
+    successMsg.classList.add('visible');
+
+    // In a real app, redirect to the dashboard
+    // window.location.href = 'dashboard.html';
+  }, 1500);
+}
+
+function handleForgotPassword(event) {
+  event.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const successMsg = document.getElementById('success-msg');
+  const errorMsg = document.getElementById('error-msg');
+
+  errorMsg.classList.remove('visible');
+  successMsg.classList.remove('visible');
+
+  if (!email) {
+    errorMsg.textContent = 'Please enter your email address first, then click "Forgot password?"';
+    errorMsg.classList.add('visible');
+    return;
+  }
+
+  successMsg.textContent = 'If an account with that email exists, a password reset link has been sent.';
+  successMsg.classList.add('visible');
+}
+</script>
+</body>
+</html>
